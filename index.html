@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Floating Kota Banjar</title>
+  <meta name="description" content="Floating Kota Banjar — indah, damai, asri, mandiri.">
+  <meta name="theme-color" content="#24160d">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kotabanjar.com/">
+  <meta property="og:title" content="Floating Kota Banjar">
+  <meta property="og:description" content="indah · damai · asri · mandiri">
+  <meta property="og:image" content="https://kotabanjar.com/assets/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preload" as="image" href="assets/map.webp" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="scene" aria-hidden="true">
+    <div class="ground" id="ground">
+      <img id="map" src="assets/map.webp" alt="" decoding="async" fetchpriority="high">
+    </div>
+    <canvas id="shadows" class="layer shadows"></canvas>
+    <div class="layer grade"></div>
+    <canvas id="mid" class="layer"></canvas>
+    <div class="layer vignette"></div>
+    <div class="layer sunglow"></div>
+  </div>
+
+  <main class="hero">
+    <h1 class="title">
+      <span class="t-big">Kota Banjar</span>
+    </h1>
+    <p class="subtitle">indah <i>·</i> damai <i>·</i> asri <i>·</i> mandiri</p>
+  </main>
+
+  <canvas id="near" class="layer near" aria-hidden="true"></canvas>
+
+  <footer class="social">
+    <a href="https://www.instagram.com/kotabanjar/" target="_blank" rel="noopener" aria-label="Instagram @kotabanjar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+      <span>@kotabanjar</span>
+    </a>
+    <a href="https://www.tiktok.com/@kotabjr" target="_blank" rel="noopener" aria-label="TikTok @kotabjr">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 3c.3 2.2 1.6 3.7 3.9 3.9v3.1c-1.4.1-2.7-.3-3.9-1.1v6.1c0 3.4-2.5 5.9-5.8 5.9S5 18.4 5 15.2c0-3.4 2.9-5.9 6.4-5.5v3.2c-1.6-.4-3.2.6-3.2 2.3 0 1.4 1.1 2.5 2.5 2.5 1.6 0 2.6-1.1 2.6-2.9V3h3.3z"/></svg>
+      <span>@kotabjr</span>
+    </a>
+  </footer>
+
+  <script src="assets/main.js" defer></script>
+</body>
+</html>
