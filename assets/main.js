@@ -272,6 +272,41 @@
   }, { passive: true });
   document.addEventListener("pointerleave", () => { ptr.tx = 0; ptr.ty = 0; });
 
+  // ---------- device tilt (phones) ----------
+  // Tilting the phone moves the layers like the mouse does on desktop.
+  const tilt = { b0: null, g0: null };
+  const clamp1 = (v) => Math.max(-1, Math.min(1, v));
+  function onTilt(e) {
+    if (e.beta == null || e.gamma == null) return;
+    let b = e.beta, g = e.gamma;
+    const angle = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
+    if (angle === 90) [b, g] = [-g, b];
+    else if (angle === -90 || angle === 270) [b, g] = [g, -b];
+    if (tilt.b0 === null) { tilt.b0 = b; tilt.g0 = g; }
+    // slowly re-centre on however the phone is being held
+    tilt.b0 += (b - tilt.b0) * 0.003;
+    tilt.g0 += (g - tilt.g0) * 0.003;
+    ptr.tx = clamp1((g - tilt.g0) / 15) * 1.5;
+    ptr.ty = clamp1((b - tilt.b0) / 15) * 1.5;
+  }
+
+  const hint = document.getElementById("tilt-hint");
+  if (!reduceMotion && "DeviceOrientationEvent" in window && matchMedia("(pointer: coarse)").matches) {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      // iOS only lets a page read the gyroscope after a tap, then asks the visitor once
+      hint.hidden = false;
+      const ask = () => {
+        DeviceOrientationEvent.requestPermission()
+          .then((state) => { if (state === "granted") addEventListener("deviceorientation", onTilt); })
+          .catch(() => {})
+          .finally(() => hint.classList.add("gone"));
+      };
+      addEventListener("touchend", ask, { once: true });
+    } else {
+      addEventListener("deviceorientation", onTilt);
+    }
+  }
+
   // ---------- setup ----------
   function resize() {
     W = innerWidth || document.documentElement.clientWidth || 1;

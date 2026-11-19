@@ -150,6 +150,31 @@ body {
 .social a:focus-visible { outline: 2px solid #ffd9a0; outline-offset: 3px; }
 .social svg { width: 18px; height: 18px; flex: none; }
 
+/* ---------- tilt hint (iOS) ---------- */
+.tilt-hint {
+  position: fixed;
+  left: 50%;
+  bottom: calc(max(24px, env(safe-area-inset-bottom)) + 56px);
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 999px;
+  font: 300 .75rem/1.2 "Jost", system-ui, sans-serif;
+  letter-spacing: .14em;
+  color: #fff3e2;
+  background: rgba(36, 20, 10, .35);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  opacity: 0;
+  animation: hint-in 1.2s 2.4s ease forwards, hint-pulse 2.8s 3.6s ease-in-out infinite;
+  transition: opacity .6s;
+}
+.tilt-hint[hidden] { display: none; }
+.tilt-hint.gone { animation: none; opacity: 0; pointer-events: none; }
+@keyframes hint-in { to { opacity: .9; } }
+@keyframes hint-pulse { 0%, 100% { opacity: .9; } 50% { opacity: .5; } }
+
 @media (prefers-reduced-motion: reduce) {
   .ground img, .hero, .ready .t-big, .ready .subtitle, .ready .social { animation: none; }
   .t-big, .subtitle, .social { opacity: 1; }
