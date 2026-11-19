@@ -7,6 +7,17 @@ html, body {
   overflow: hidden;
 }
 
+/* no selecting, dragging, long-press menus or tap flashes; links still work */
+html {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none; /* no pinch-zoom or pull-to-refresh on the scene */
+}
+img, canvas, svg { -webkit-user-drag: none; user-drag: none; pointer-events: none; }
+a, button { -webkit-user-drag: none; touch-action: manipulation; }
+
 body {
   font-family: "Jost", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;

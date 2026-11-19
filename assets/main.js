@@ -9,6 +9,14 @@
   // Gentle breeze drifting left and slightly down.
   const WIND = { x: -0.96, y: 0.27 };
 
+  // Lock the page: no right-click / long-press menu, dragging, selecting or zooming.
+  const block = (e) => e.preventDefault();
+  for (const type of ["contextmenu", "dragstart", "selectstart", "gesturestart", "gesturechange"]) {
+    document.addEventListener(type, block, { passive: false });
+  }
+  document.addEventListener("touchmove", (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+  document.addEventListener("dblclick", block);
+
   const map = document.getElementById("map");
   const ground = document.getElementById("ground");
   const cvS = document.getElementById("shadows");
